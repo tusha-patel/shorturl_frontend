@@ -26,6 +26,8 @@ const UrlForm = () => {
         try {
             const data = await createShortUrl(url, slugData);
             setShortUrl(`${data.shortUrl || data}`);
+            console.log(data);
+
             queryClient.invalidateQueries({ queryKey: ["userUrls"] })
             console.log(data);
             setError(null)
