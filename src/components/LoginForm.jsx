@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { loginUser } from '../api/user.api';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../store/slice/authSlice';
 import { useNavigate } from '@tanstack/react-router';
 import Loading from './Loading';
@@ -12,18 +12,12 @@ const LoginForm = ({ loginState }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const auth = useSelector((state) => state.auth);
-
-    console.log(auth);
-
+    // const auth = useSelector((state) => state.auth);
     useEffect(() => {
         if (error) {
-            console.log("called");
-
             const timer = setTimeout(() => {
                 setError(null);
             }, 5000);
-
             return () => clearTimeout(timer);
         }
     }, [error]);

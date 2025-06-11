@@ -3,14 +3,13 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'https://shorturl-node-988e.vercel.app',
-      withCredentials: true, // ✅ sends cookies with every request
+      withCredentials: true, 
 
 });
 
 // Request interceptor
 axiosInstance.interceptors.request.use(
     (config) => {
-        // You can add auth tokens or other request modifications here
         return config;
     },
     (error) => {

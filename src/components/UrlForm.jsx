@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { createShortUrl } from '../api/shortUrl.api';
 import { useSelector } from 'react-redux';
 import { queryClient } from '../main';
@@ -11,8 +11,6 @@ const UrlForm = () => {
     const [shortUrl, setShortUrl] = useState("");
     const [copied, setCopied] = useState(false);
     const { isAuthenticated } = useSelector((state) => state.auth);
-
-    console.log(isAuthenticated);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +25,6 @@ const UrlForm = () => {
             const data = await createShortUrl(url, slugData);
             setShortUrl(`${data.shortUrl || data}`);
             queryClient.invalidateQueries({ queryKey: ["userUrls"] })
-            console.log(data);
             setError(null)
         } catch (err) {
             setError(err.message || "Something went wrong. Please try again.");

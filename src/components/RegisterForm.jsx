@@ -30,19 +30,18 @@ const RegisterForm = ({ loginState }) => {
 
         if (!name.trim()) {
             setError("Name is required.");
-            return; // Prevent submission
+            return; 
         }
         if (!email.trim()) {
             setError("Email is required.");
-            return; // Prevent submission
+            return; 
         }
         if (password.length < 6) {
             setError("Password must be at least 6 characters long.");
-            return; // Prevent submission
+            return; 
         }
 
         setLoading(true);
-        console.log('Register:', { name, email, password });
         try {
             const data = await registerUser(name, email, password);
             dispatch(login(data.user));

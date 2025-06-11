@@ -10,8 +10,6 @@ export const checkAuth = async ({ context }) => {
             queryKey: ["currentUser"],
             queryFn: getCurrentUser,
         });
-        console.log(user);
-
         if (!user) return false
         store.dispatch(login(user));
         const { isAuthenticated } = store.getState().auth;

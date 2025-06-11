@@ -6,7 +6,6 @@ export default function Navbar() {
 
     const { isAuthenticated } = useSelector((state) => state.auth)
     const navigate = useNavigate();
-    console.log(isAuthenticated);
     const dispatch = useDispatch();
     const handleLogout = () => {
         logoutUser();
@@ -16,12 +15,10 @@ export default function Navbar() {
     return (
         <header className="bg-blue-600 text-white shadow">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-                {/* Left side: Logo or Title */}
                 <Link to={"/"} className="text-xl font-semibold">
                     Url shortner
                 </Link>
 
-                {/* Right side: Auth Buttons */}
                 <div className="space-x-4">
                     {isAuthenticated ? (
                         <button onClick={handleLogout}

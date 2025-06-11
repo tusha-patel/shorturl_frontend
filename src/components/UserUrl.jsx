@@ -14,18 +14,14 @@ const UserUrl = () => {
         staleTime: 0,
 
     });
-    console.log(data);
-
 
     const handleCopy = async (url) => {
         try {
             await navigator.clipboard.writeText(`https://shorturl-node-988e.vercel.app/${url}`);
             setCopiedUrl(url);
-            console.log(url);
-
             const timer = setTimeout(() => {
                 setCopiedUrl(null);
-                clearTimeout(timer); // Clean up the timer
+                clearTimeout(timer); 
             }, 2000);
 
             // Clean up timer if component unmounts
@@ -43,8 +39,8 @@ const UserUrl = () => {
             {data?.length === 0 ? (
                 <p className="text-gray-500">No URLs created yet.</p>
             ) : (
-                <div className="overflow-x-auto max-h-60 ">
-                    <table className="min-w-full text-left !border-0 !border-none rounded-xl">
+                <div className="overflow-x-auto h-60 scroll-hide ">
+                    <table className="min-w-full text-left !border-t !border-none rounded-xl">
                         <thead className="bg-gray-100 text-gray-700 sticky top-0  left-0">
                             <tr>
                                 <th className="p-3">Original URL</th>
@@ -53,17 +49,17 @@ const UserUrl = () => {
                                 <th className="p-3">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='' >
                             {data?.map((url, index) => (
                                 <tr key={index} className="hover:bg-gray-50 border-b border-gray-200 ">
                                     <td className="p-3 max-w-xs truncate text-gray-800">{url.full_url}</td>
-                                    <td className="p-3 text-blue-700 ">
+                                    <td className="p-3 text-blue-700 max-w-xs  truncate ">
                                         <a href={`https://shorturl-node-988e.vercel.app/${url.short_url}`} target="_blank" rel="noopener noreferrer">
                                             {`https://shorturl-node-988e.vercel.app/${url.short_url}`}
                                         </a>
                                     </td>
                                     <td className="p-3 text-gray-700">
-                                        <span className='px-2 py-1 bg-blue-600/20 rounded-2xl font-medium'>{url.clicks} click</span>
+                                        <span className='px-2 py-1 bg-blue-600/20 rounded-2xl font-medium whitespace-nowrap '>{url.clicks} click</span>
                                     </td>
                                     <td className="p-3">
                                         <button
@@ -73,7 +69,6 @@ const UserUrl = () => {
                                                 : 'bg-blue-700 text-white hover:bg-blue-800'
                                                 }`}
                                         >
-                                            {console.log(url)}
                                             {copiedUrl === url.short_url ? 'Copied!' : 'Copy'}
                                         </button>
                                     </td>
