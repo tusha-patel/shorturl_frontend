@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://shorturl-node.vercel.app',
       withCredentials: true, // ✅ sends cookies with every request
 
 });

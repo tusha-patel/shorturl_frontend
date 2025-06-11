@@ -50,8 +50,8 @@ const UserUrl = () => {
                                 <tr key={index} className="hover:bg-gray-50 border-b border-gray-200 ">
                                     <td className="p-3 max-w-xs truncate text-gray-800">{url.full_url}</td>
                                     <td className="p-3 text-blue-700 ">
-                                        <a href={`http://localhost:3000/${url.short_url}`} target="_blank" rel="noopener noreferrer">
-                                            {`http://localhost:3000/${url.short_url}`}
+                                        <a href={`https://shorturl-node.vercel.app/${url.short_url}`} target="_blank" rel="noopener noreferrer">
+                                            {`https://shorturl-node.vercel.app/${url.short_url}`}
                                         </a>
                                     </td>
                                     <td className="p-3 text-gray-700">
@@ -59,7 +59,7 @@ const UserUrl = () => {
                                     </td>
                                     <td className="p-3">
                                         <button
-                                            onClick={() => handleCopy(`http://localhost:3000/${url.short_url}`)}
+                                            onClick={() => handleCopy(`https://shorturl-node.vercel.app/${url.short_url}`)}
                                             className={`px-4 py-1.5 rounded-md font-medium  cursor-pointer ${copiedUrl === url.short_url
                                                 ? 'bg-green-500 text-white'
                                                 : 'bg-blue-700 text-white hover:bg-blue-800 '
