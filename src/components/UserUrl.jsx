@@ -19,9 +19,17 @@ const UserUrl = () => {
 
     const handleCopy = async (url) => {
         try {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(`https://shorturl-node-988e.vercel.app/${url}`);
             setCopiedUrl(url);
-            setTimeout(() => setCopiedUrl(null), 2000);
+            console.log(url);
+
+            const timer = setTimeout(() => {
+                setCopiedUrl(null);
+                clearTimeout(timer); // Clean up the timer
+            }, 2000);
+
+            // Clean up timer if component unmounts
+            return () => clearTimeout(timer);
         } catch (err) {
             console.error("Failed to copy:", err);
         }
@@ -36,8 +44,8 @@ const UserUrl = () => {
                 <p className="text-gray-500">No URLs created yet.</p>
             ) : (
                 <div className="overflow-x-auto h-60 ">
-                    <table className="min-w-full text-left border border-gray-200 rounded-xl">
-                        <thead className="bg-gray-100 text-gray-700 sticky top-0 ">
+                    <table className="min-w-full text-left !border-0 !border-none rounded-xl">
+                        <thead className="bg-gray-100 text-gray-700 sticky top-0  left-0">
                             <tr>
                                 <th className="p-3">Original URL</th>
                                 <th className="p-3">Short URL</th>
@@ -46,7 +54,7 @@ const UserUrl = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.reverse()?.map((url, index) => (
+                            {data?.map((url, index) => (
                                 <tr key={index} className="hover:bg-gray-50 border-b border-gray-200 ">
                                     <td className="p-3 max-w-xs truncate text-gray-800">{url.full_url}</td>
                                     <td className="p-3 text-blue-700 ">
@@ -59,12 +67,13 @@ const UserUrl = () => {
                                     </td>
                                     <td className="p-3">
                                         <button
-                                            onClick={() => handleCopy(`https://shorturl-node-988e.vercel.app/${url.short_url}`)}
-                                            className={`px-4 py-1.5 rounded-md font-medium  cursor-pointer ${copiedUrl === url.short_url
-                                                ? 'bg-green-500 text-white'
-                                                : 'bg-blue-700 text-white hover:bg-blue-800 '
-                                                } transition`}
+                                            onClick={() => handleCopy(`${url.short_url}`)}
+                                            className={`px-4 py-1.5 rounded-md font-medium cursor-pointer transition-all duration-200 ${copiedUrl === url.short_url
+                                                ? 'bg-green-500 text-white shadow-md'
+                                                : 'bg-blue-700 text-white hover:bg-blue-800'
+                                                }`}
                                         >
+                                            {console.log(url)}
                                             {copiedUrl === url.short_url ? 'Copied!' : 'Copy'}
                                         </button>
                                     </td>
