@@ -43,7 +43,7 @@ const UserUrl = () => {
             {data?.length === 0 ? (
                 <p className="text-gray-500">No URLs created yet.</p>
             ) : (
-                <div className="overflow-x-auto h-60 ">
+                <div className="overflow-x-auto max-h-60 ">
                     <table className="min-w-full text-left !border-0 !border-none rounded-xl">
                         <thead className="bg-gray-100 text-gray-700 sticky top-0  left-0">
                             <tr>

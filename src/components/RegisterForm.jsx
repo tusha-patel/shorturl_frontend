@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/slice/authSlice';
 import { useNavigate } from '@tanstack/react-router';
 import Loading from './Loading';
+import { useEffect } from 'react';
 
 const RegisterForm = ({ loginState }) => {
     const [name, setName] = useState('');
@@ -13,10 +14,33 @@ const RegisterForm = ({ loginState }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setError(null);
+            return () => clearTimeout(timer);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [error])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!name.trim()) {
+            setError("Name is required.");
+            return; // Prevent submission
+        }
+        if (!email.trim()) {
+            setError("Email is required.");
+            return; // Prevent submission
+        }
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long.");
+            return; // Prevent submission
+        }
+
         setLoading(true);
         console.log('Register:', { name, email, password });
         try {
